@@ -1,0 +1,61 @@
+accelerator:
+  displayName: Node accelerator
+  description: A express js template app
+  iconUrl: https://raw.githubusercontent.com/simple-starters/icons/master/icon-nodejs.png
+  tags:
+  - node
+  - express  
+
+  # options for the UI
+  options:
+  - name: projectName
+    displayName: Project Name
+    inputType: string
+    dataType: string
+    required: true
+  - name: description
+    displayName: Description
+    inputType: string
+    dataType: string
+    required: true
+  - name: githubRepo
+    displayName: Github repo
+    inputType: string
+    required: true
+  - name: authorName
+    displayName: Author Name
+    inputType: string
+    dataType: string
+    required: true
+  - name: includeK8s
+    displayName: "Include k8s assets?"
+    inputType: checkbox    
+    dataType: boolean
+    defaultValue: false
+    required: true
+
+engine:
+  sources:
+    - includes: [ "**" ]
+      excludes: [ "kubernetes/**" ]
+    - includes: [ "package.json" ]
+      transformations:
+      - type: ReplaceText
+        substitutions:
+        - text: node-accelerator-name
+          with: "#projectName"
+        - text: accelerator-description
+          with: "#description"
+        - text: github-repo
+          with: "#githubRepo"
+        - text: author-name
+          with: "#author-name"
+    - includes: [ "kubernetes/node-accelerator.yml" ]
+      conditions: "#includek8s == true"
+      transformations:
+      - type: ReplaceText
+        substitutions:
+          - text: node-accelerator
+            with: "#projectName"
+      - type: RewritePath
+        rewriteTo: "'kubernetes/' + #projectName + '.yml'"         
