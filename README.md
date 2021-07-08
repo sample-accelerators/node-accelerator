@@ -1,1 +1,1 @@
-# node-accelerator
+# Sample node-accelerator
