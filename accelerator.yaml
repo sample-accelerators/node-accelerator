@@ -8,28 +8,18 @@ accelerator:
 
   # options for the UI
   options:
-  - name: projectName
-    displayName: Project Name
-    inputType: string
-    dataType: string
-    required: true
-  - name: description
-    displayName: Description
-    inputType: string
-    dataType: string
-    required: true
   - name: githubRepo
-    displayName: Github repo
+    label: Github repo URL
     inputType: string
     required: true
   - name: authorName
-    displayName: Author Name
+    label: Author Name
     inputType: string
     dataType: string
     required: true
   - name: includeK8s
-    displayName: "Include k8s assets?"
-    inputType: checkbox    
+    label: "Include k8s assets?"
+    inputType: toggle    
     dataType: boolean
     defaultValue: false
     required: true
@@ -43,19 +33,19 @@ engine:
       - type: ReplaceText
         substitutions:
         - text: node-accelerator-name
-          with: "#projectName"
+          with: "#artifactId"
         - text: accelerator-description
-          with: "#description"
+          with: "#projectDescription"
         - text: github-repo
           with: "#githubRepo"
         - text: author-name
-          with: "#author-name"
+          with: "#authorName"
     - includes: [ "kubernetes/node-accelerator.yml" ]
-      conditions: "#includek8s == true"
+      condition: "#includeK8s"
       transformations:
       - type: ReplaceText
         substitutions:
           - text: node-accelerator
-            with: "#projectName"
+            with: "#artifactId"
       - type: RewritePath
-        rewriteTo: "'kubernetes/' + #projectName + '.yml'"         
+        rewriteTo: "'kubernetes/' + #artifactId + '.yml'"         
