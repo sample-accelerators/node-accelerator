@@ -27,7 +27,7 @@ accelerator:
 engine:
   sources:
     - includes: [ "**" ]
-      excludes: [ "kubernetes/**" ]
+      excludes: [ "kubernetes/**", "README.md", "k8s.md" ]
     - includes: [ "package.json" ]
       transformations:
       - type: ReplaceText
@@ -45,7 +45,16 @@ engine:
       transformations:
       - type: ReplaceText
         substitutions:
-          - text: node-accelerator
-            with: "#artifactId"
+        - text: node-accelerator
+          with: "#artifactId"
       - type: RewritePath
-        rewriteTo: "'kubernetes/' + #artifactId + '.yml'"         
+        rewriteTo: "'kubernetes/' + #artifactId + '.yml'"
+    - includes: ["README.md"]
+      transformations:
+      - type: ReplaceText
+        substitutions:
+        - text: node-accelerator
+          with: "#artifactId"
+    - includes: ["k8s.md"]
+      condition: "#includeK8s"
+    
