@@ -5,12 +5,7 @@
   "main": "server.js",
   "scripts": {
     "server": "node server.js"    
-  },
-  "repository": {
-    "type": "git",
-    "url": "github-repo"
-  },
-  "author": "author-name",
+  },  
   "license": "Unlicense",
   "dependencies": {
     "express": "^4.17.1"

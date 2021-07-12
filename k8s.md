@@ -1,6 +1,6 @@
 # Kubernetes resources
 
-it also comes with the option to include a kubernetes deployment. 
+it also comes with a kubernetes deployment. 
 To deploy it go to the kubernetes folder and run `kubectl create -f node-accelerator.yml`
 this will create a deployment and a `NodePort` service listening on port `30686`.
 
@@ -9,7 +9,7 @@ if you deploy in a minikube instance it should be available on `http://localhost
 
 # Kind
 
-If you deploy the app in a `kind` you'll need to add a `extraPortMapping` to your kind cluster definition file, _I.E._
+If you deploy the app in a `kind` cluster you'll need to add a `extraPortMapping` to your kind cluster definition file, _I.E._
 
 ```yaml
 kind: Cluster
@@ -23,3 +23,4 @@ nodes:
 ```
 
 For more information go to https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings.
+

@@ -8,15 +8,6 @@ accelerator:
 
   # options for the UI
   options:
-  - name: githubRepo
-    label: Github repo URL
-    inputType: string
-    required: true
-  - name: authorName
-    label: Author Name
-    inputType: string
-    dataType: string
-    required: true
   - name: includeK8s
     label: "Include k8s assets?"
     inputType: toggle    
@@ -35,11 +26,7 @@ engine:
         - text: node-accelerator-name
           with: "#artifactId"
         - text: accelerator-description
-          with: "#projectDescription"
-        - text: github-repo
-          with: "#githubRepo"
-        - text: author-name
-          with: "#authorName"
+          with: "#projectDescription"        
     - includes: [ "kubernetes/node-accelerator.yml" ]
       condition: "#includeK8s"
       transformations:
@@ -48,13 +35,20 @@ engine:
         - text: node-accelerator
           with: "#artifactId"
       - type: RewritePath
-        rewriteTo: "'kubernetes/' + #artifactId + '.yml'"
-    - includes: ["README.md"]
-      transformations:
-      - type: ReplaceText
-        substitutions:
-        - text: node-accelerator
-          with: "#artifactId"
-    - includes: ["k8s.md"]
-      condition: "#includeK8s"
+        rewriteTo: "'kubernetes/' + #artifactId + '.yml'"    
+    - name: README
+      type: Combo
+      onConflict: Append
+      sources:
+      - include: [ "README.md"]
+        transformations:
+        - type: ReplaceText
+          substitutions:
+          - text: node-accelerator
+            with: "#artifactId"
+      - includes: ["k8s.md"]
+        condition: "#includeK8s" 
+        transformations:     
+        - type: RewritePath
+          rewriteTo: "'README.md'"
     
