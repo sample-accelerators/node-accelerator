@@ -18,7 +18,7 @@ accelerator:
 engine:
   sources:
     - includes: [ "**" ]
-      excludes: [ "kubernetes/**", "README.md", "k8s.md" ]
+      excludes: [ "kubernetes/**", "README.md", "k8s.md", "skaffold.md", "Dockerfile" ]
     - includes: [ "package.json" ]
       transformations:
       - type: ReplaceText
@@ -27,15 +27,13 @@ engine:
           with: "#artifactId"
         - text: accelerator-description
           with: "#projectDescription"        
-    - includes: [ "kubernetes/node-accelerator.yml" ]
+    - includes: [ "kubernetes/deployment.yml", "kubernetes/service.yml", "kubernetes/skaffold.yml", "Dockerfile" ]
       condition: "#includeK8s"
       transformations:
       - type: ReplaceText
         substitutions:
         - text: node-accelerator
           with: "#artifactId"
-      - type: RewritePath
-        rewriteTo: "'kubernetes/' + #artifactId + '.yml'"    
     - name: README
       type: Combo
       onConflict: Append
@@ -48,7 +46,11 @@ engine:
             with: "#artifactId"
       - includes: ["k8s.md"]
         condition: "#includeK8s" 
-        transformations:     
+        transformations:
+        - type: ReplaceText
+          substitutions:
+          - text: node-accelerator
+            with: "#artifactId"
         - type: RewritePath
           rewriteTo: "'README.md'"
     

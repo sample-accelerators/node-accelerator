@@ -1,26 +1,24 @@
-# Kubernetes resources
+# Kubernetes
 
-it also comes with a kubernetes deployment. 
-To deploy it go to the kubernetes folder and run `kubectl create -f node-accelerator.yml`
-this will create a deployment and a `NodePort` service listening on port `30686`.
+This project uses skaffold (https://skaffold.dev/) to handle the creation of the image
+and deployment of the k8s assets.
 
-# Minikube
-if you deploy in a minikube instance it should be available on `http://localhost:30686`.
+Before doing the deployment make sure that you have skaffold on your env, to install it
+follow the instructions here https://skaffold.dev/docs/install/
 
-# Kind
 
-If you deploy the app in a `kind` cluster you'll need to add a `extraPortMapping` to your kind cluster definition file, _I.E._
+# Deploy App
 
-```yaml
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-  extraPortMappings:
-  - containerPort: 30686
-    hostPort: 30686
-    protocol: TCP
+To deploy the app, go to the kubernetes folder and run the following command:
+
+```
+skaffold run -p local --port-forward
 ```
 
-For more information go to https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings.
+the app should be accessible on `http://localhost:3000`
 
+To delete the app run
+
+```
+skaffold delete
+```
