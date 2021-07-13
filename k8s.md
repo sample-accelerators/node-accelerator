@@ -15,7 +15,8 @@ To deploy the app, go to the kubernetes folder and run the following command:
 skaffold run -p local --port-forward
 ```
 
-the app should be accessible on `http://localhost:3000`
+look for the command output, it should the tell you the port that is listening, so you can check the 
+app on `http://localhost:<port>`
 
 To delete the app run
 
