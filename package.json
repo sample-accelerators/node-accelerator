@@ -4,8 +4,8 @@
   "description": "accelerator-description",
   "main": "server.js",
   "scripts": {
-    "server": "node server.js"    
-  },  
+    "server": "node server.js"
+  },
   "license": "Unlicense",
   "dependencies": {
     "express": "^4.17.1"

@@ -17,7 +17,19 @@ spec:
     spec:
       containers:
       - image: node-accelerator:latest
-        imagePullPolicy: IfNotPresent        
+        imagePullPolicy: IfNotPresent
         name: node-accelerator
         ports:
         - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3

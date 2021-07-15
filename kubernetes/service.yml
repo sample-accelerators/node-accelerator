@@ -7,6 +7,6 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: 3000    
+    targetPort: 3000
   selector:
-    app.kubernetes.io/name: node-accelerator  
+    app.kubernetes.io/name: node-accelerator

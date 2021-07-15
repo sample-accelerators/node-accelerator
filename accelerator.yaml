@@ -4,21 +4,21 @@ accelerator:
   iconUrl: https://raw.githubusercontent.com/simple-starters/icons/master/icon-nodejs.png
   tags:
   - node
-  - express  
+  - express
 
   # options for the UI
   options:
   - name: includeK8s
-    label: "Include k8s assets?"
-    inputType: toggle    
+    label: "Include kubernetes resources?"
+    inputType: toggle
     dataType: boolean
-    defaultValue: false
+    defaultValue: true
     required: true
 
 engine:
   sources:
     - includes: [ "**" ]
-      excludes: [ "kubernetes/**", "README.md", "k8s.md", "skaffold.md", "Dockerfile" ]
+      excludes: [ "kubernetes/**", "README.md", "k8s.md", "skaffold.md" ]
     - includes: [ "package.json" ]
       transformations:
       - type: ReplaceText
@@ -26,8 +26,8 @@ engine:
         - text: node-accelerator-name
           with: "#artifactId"
         - text: accelerator-description
-          with: "#projectDescription"        
-    - includes: [ "kubernetes/deployment.yml", "kubernetes/service.yml", "kubernetes/skaffold.yml", "Dockerfile" ]
+          with: "#projectDescription"
+    - includes: [ "kubernetes/deployment.yml", "kubernetes/service.yml", "kubernetes/skaffold.yml" ]
       condition: "#includeK8s"
       transformations:
       - type: ReplaceText
@@ -45,7 +45,7 @@ engine:
           - text: node-accelerator
             with: "#artifactId"
       - includes: ["k8s.md"]
-        condition: "#includeK8s" 
+        condition: "#includeK8s"
         transformations:
         - type: ReplaceText
           substitutions:
@@ -53,4 +53,3 @@ engine:
             with: "#artifactId"
         - type: RewritePath
           rewriteTo: "'README.md'"
-    

@@ -2,10 +2,10 @@ apiVersion: skaffold/v2beta11
 kind: Config
 build:
   artifacts:
-  - image: node-accelerator    
+  - image: node-accelerator
     context: ../
-    docker:
-      dockerfile: "Dockerfile"
+    buildpacks:
+      builder: paketobuildpacks/builder:full
 deploy:
   kubectl:
     manifests:
