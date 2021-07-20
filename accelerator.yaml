@@ -27,13 +27,22 @@ engine:
           with: "#artifactId"
         - text: accelerator-description
           with: "#projectDescription"
-    - includes: [ "kubernetes/deployment.yml", "kubernetes/service.yml", "kubernetes/skaffold.yml" ]
+    - includes: [ "kubernetes/deployment.yml", "kubernetes/service.yml" ]
       condition: "#includeK8s"
       transformations:
       - type: ReplaceText
         substitutions:
         - text: node-accelerator
           with: "#artifactId"
+    - includes: [ "kubernetes/skaffold.yml" ]
+      condition: "#includeK8s"
+      transformations:
+      - type: ReplaceText
+        substitutions:
+        - text: node-accelerator
+          with: "#artifactId"
+      - type: RewritePath
+        rewriteTo: "#filename"
     - name: README
       type: Combo
       onConflict: Append

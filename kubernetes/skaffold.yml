@@ -3,14 +3,13 @@ kind: Config
 build:
   artifacts:
   - image: node-accelerator
-    context: ../
     buildpacks:
       builder: paketobuildpacks/builder:full
 deploy:
   kubectl:
     manifests:
-    - service.yml
-    - deployment.yml
+    - kubernetes/service.yml
+    - kubernetes/deployment.yml
 portForward:
   - resourceType: service
     resourceName: node-accelerator
