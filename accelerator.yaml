@@ -1,6 +1,6 @@
 accelerator:
-  displayName: Node accelerator
-  description: A express js template app
+  displayName: Node.js accelerator
+  description: A Node.js sample app using Express
   iconUrl: https://raw.githubusercontent.com/simple-starters/icons/master/icon-nodejs.png
   tags:
   - node
