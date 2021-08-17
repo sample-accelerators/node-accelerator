@@ -8,6 +8,9 @@ accelerator:
 
   # options for the UI
   options:
+  - name: projectDescription
+    display: true
+    defaultValue: ''
   - name: includeK8s
     label: "Include kubernetes resources?"
     inputType: toggle
