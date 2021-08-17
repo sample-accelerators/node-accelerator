@@ -9,6 +9,7 @@ accelerator:
   # options for the UI
   options:
   - name: projectDescription
+    label: Description
     display: true
     defaultValue: ''
   - name: includeK8s
