@@ -11,7 +11,7 @@ follow the instructions in:
 
 # Deploy App
 
-To deploy the app, go to the kubernetes folder and run the following command:
+To deploy the app, run the following command:
 
 ```
 skaffold run -p local --port-forward
