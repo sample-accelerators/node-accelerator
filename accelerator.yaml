@@ -18,6 +18,28 @@ accelerator:
     dataType: boolean
     defaultValue: true
     required: true
+  - name: select     
+    inputType: select
+    dataType: number
+    choices:
+    - value: 1
+      text: first
+    - value: 2
+      text: second
+    - value: 3
+      text: third
+    defaultValue: 1
+  - name: dependons1
+    label: Depends on 1
+    dependsOn:
+      name: select
+      value: 1
+  - name: dependons2
+    label: Depends on 2
+    dependsOn:
+      name: select
+      value: 2
+
 
 engine:
   sources:
